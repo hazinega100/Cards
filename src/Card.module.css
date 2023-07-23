@@ -1,0 +1,18 @@
+.card {
+    margin: 10px;
+    width: 200px;
+    border: 1px solid gray;
+}
+.img {
+    width: 200px;
+}
+.title {
+    border-top: 1px solid gray;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 16px;
+}
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
