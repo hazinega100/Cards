@@ -2,3 +2,15 @@
     display: flex;
     flex-wrap: wrap;
 }
+.error {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loading {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

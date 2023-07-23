@@ -1,8 +1,8 @@
 import { legacy_createStore, combineReducers, Store } from "redux";
-import {CardsType, reducer} from "./reducer";
+import {InitStateType, reducer} from "./reducer";
 
 export interface RootState {
-    reducer: CardsType[];
+    reducer: InitStateType;
 }
 export const rootReducer = combineReducers<RootState>({
         reducer: reducer
