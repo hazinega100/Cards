@@ -1,5 +1,8 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import s from "./Card.module.css";
+import Checkbox from '@mui/material/Checkbox';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 type CardPropsType = {
     id: number
@@ -8,13 +11,18 @@ type CardPropsType = {
     callBack: (id: number) => void
 }
 
-export const Card = ({id, url, title, callBack}: CardPropsType) => {
-    const onClickHandler = () => {
+export const Card = React.memo(({id, url, title, callBack}: CardPropsType) => {
+    const onClickHandler = useCallback(() => {
         callBack(id)
-    }
+    }, [id])
     return (
         <div key={id} className={s.card}>
-            <button onClick={onClickHandler}>x</button>
+            <div className={s.card_panel}>
+                <Checkbox />
+                <IconButton onClick={onClickHandler} aria-label="delete" size="small">
+                    <DeleteIcon fontSize="inherit"/>
+                </IconButton>
+            </div>
             <img className={s.img}
                  src={url}
                  alt="card"
@@ -22,4 +30,4 @@ export const Card = ({id, url, title, callBack}: CardPropsType) => {
             <div className={s.title}>{title}</div>
         </div>
     )
-};
+})

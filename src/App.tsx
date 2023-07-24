@@ -1,17 +1,20 @@
-import React, {useState} from "react";
+import React from "react";
 import "./App.css";
 import {Cards} from "./components/Cards";
 import {useSelector} from "react-redux";
 import {RootState} from "./state/store";
 import {InitStateType} from "./state/reducer";
+import {EditableSpan} from "./components/EditableSpan";
 
 function App() {
     const data = useSelector<RootState, InitStateType>(state => state.reducer)
-    const [title, setTitle] = useState("The Best Shop")
     return (
         <div className="App">
-            <h1>{title}</h1>
-            <Cards data={data}/>
+            <div>
+                <EditableSpan value={data.title} />
+                <h3>{data.description}</h3>
+            </div>
+            <Cards data={data} />
         </div>
     );
 }

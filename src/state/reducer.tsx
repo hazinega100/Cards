@@ -11,6 +11,8 @@ export type CardsType = {
 export type StatusType = "idle" | "loading" | "success" | "error"
 
 export type InitStateType = {
+    title: string
+    description: string
     cards: CardsType[]
     status: string
     error: null
@@ -20,10 +22,17 @@ type SetCardsACType = ReturnType<typeof setCardsAC>
 type DeleteCardACType = ReturnType<typeof deleteCardAC>
 type ChangeStatusACType = ReturnType<typeof changeStatusAC>
 type ErrorStatusACType = ReturnType<typeof errorStatusAC>
+type EditTitleACType = ReturnType<typeof editTitleAC>
 
-type ActionType = SetCardsACType | DeleteCardACType | ChangeStatusACType | ErrorStatusACType
+type ActionType = SetCardsACType
+    | DeleteCardACType
+    | ChangeStatusACType
+    | ErrorStatusACType
+    | EditTitleACType
 
 const initState: InitStateType = {
+    title: "The Best Shop",
+    description: "This store has everything",
     cards: [],
     status: "idle",
     error: null
@@ -53,6 +62,12 @@ export const reducer = (state = initState, action: ActionType): InitStateType =>
             return {
                 ...state,
                 error: action.payload
+            }
+        }
+        case "EDIT_TITLE": {
+            return {
+                ...state,
+                title: action.payload
             }
         }
         default: {
@@ -86,5 +101,12 @@ export const errorStatusAC = (error: any) => {
     return {
         type: "ERROR_STATUS",
         payload: error
+    } as const
+}
+
+export const editTitleAC = (value: string) => {
+    return {
+        type: "EDIT_TITLE",
+        payload: value
     } as const
 }

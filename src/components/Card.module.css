@@ -3,6 +3,10 @@
     width: 200px;
     border: 1px solid gray;
 }
+.card_panel {
+    display: flex;
+    justify-content: flex-end;
+}
 .img {
     width: 200px;
 }

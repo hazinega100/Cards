@@ -26,9 +26,6 @@ export const Cards = ({data}: CardPropsType) => {
                 dispatch(errorStatusAC(error))
             })
     }, [])
-    // if (!data.length) {
-    //     return <h3>Cards not found</h3>
-    // }
     const deleteCard = (id: number) => {
         dispatch(deleteCardAC(id))
     }
