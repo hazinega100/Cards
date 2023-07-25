@@ -12,6 +12,9 @@ type CardPropsType = {
 }
 
 export const Card = React.memo(({id, url, title, callBack}: CardPropsType) => {
+
+    console.log("CARD render")
+
     const onClickHandler = useCallback(() => {
         callBack(id)
     }, [id])
@@ -23,10 +26,12 @@ export const Card = React.memo(({id, url, title, callBack}: CardPropsType) => {
                     <DeleteIcon fontSize="inherit"/>
                 </IconButton>
             </div>
-            <img className={s.img}
-                 src={url}
-                 alt="card"
-            />
+            <div>
+                <img className={s.img}
+                     src={url}
+                     alt="card"
+                />
+            </div>
             <div className={s.title}>{title}</div>
         </div>
     )

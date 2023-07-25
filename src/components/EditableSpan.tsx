@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import TextField from '@mui/material/TextField';
 import {useDispatch} from "react-redux";
 import {editTitleAC} from "../state/reducer";
@@ -7,30 +7,34 @@ type EditableSpanPropsType = {
     value: string
 }
 
-export const EditableSpan = ({value}: EditableSpanPropsType) => {
-    const [edit, setEdit] = useState(false)
-    const [localStorageValue, setLocalStorageValue] = useState(value);
+export const EditableSpan = React.memo(({value}: EditableSpanPropsType) => {
+
+    console.log("EditableSpan render")
+
+    const [editMode, setEditMode] = useState<boolean>(false)
+    const [localStorageValue, setLocalStorageValue] = useState<string>(value);
     const dispatch = useDispatch()
     useEffect(() => {
-        const storedValue = localStorage.getItem("newTitle")
-        if (storedValue) {
-            setLocalStorageValue(storedValue)
+        const test = localStorage.getItem("newTitle")
+        if (test) {
+            setLocalStorageValue(test)
         }
-    },[])
-    const activeEditMode = () => {
-        setEdit(true)
-    }
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    }, [])
+    const activeEditMode = useCallback(() => {
+        setEditMode(true)
+    }, [editMode])
+    const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const event = e.currentTarget.value
+        setLocalStorageValue(event)
         dispatch(editTitleAC(event))
-        return localStorage.setItem("newTitle", event)
-    }
-    const activeViewMode = () => {
-        setEdit(false)
-    }
+        localStorage.setItem("newTitle", event)
+    }, [])
+    const activeViewMode = useCallback(() => {
+        setEditMode(false)
+    }, [editMode])
     return (
         <div>
-            {edit
+            {editMode
                 ? <TextField value={localStorageValue}
                              onChange={onChangeHandler}
                              onBlur={activeViewMode}
@@ -41,4 +45,4 @@ export const EditableSpan = ({value}: EditableSpanPropsType) => {
             }
         </div>
     );
-};
+})

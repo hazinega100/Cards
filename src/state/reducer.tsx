@@ -40,7 +40,7 @@ const initState: InitStateType = {
 
 export const reducer = (state = initState, action: ActionType): InitStateType => {
     switch (action.type) {
-        case "INIT_CARDS": {
+        case "ITEMS_LOADED": {
             return {
                 ...state,
                 cards: action.payload
@@ -78,35 +78,37 @@ export const reducer = (state = initState, action: ActionType): InitStateType =>
 
 export const setCardsAC = (cards: CardsType[]) => {
     return {
-        type: "INIT_CARDS",
+        type: "ITEMS_LOADED",
         payload: cards
     } as const
 }
-
 export const deleteCardAC = (id: number) => {
     return {
         type: "DELETE_CARD",
         payload: id
     } as const
 }
-
 export const changeStatusAC = (status: StatusType) => {
     return {
         type: "CHANGED_STATUS",
         payload: status
     } as const
 }
-
 export const errorStatusAC = (error: any) => {
     return {
         type: "ERROR_STATUS",
         payload: error
     } as const
 }
-
 export const editTitleAC = (value: string) => {
     return {
         type: "EDIT_TITLE",
         payload: value
     } as const
 }
+
+// SLED
+// const dispatch = useDispatch()
+// export const loadItemsTC = (itemsID: number) => () => {
+//
+// }
