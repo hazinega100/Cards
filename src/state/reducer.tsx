@@ -43,7 +43,7 @@ export const reducer = (state = initState, action: ActionType): InitStateType =>
         case "ITEMS_LOADED": {
             return {
                 ...state,
-                cards: action.payload
+                cards: [...state.cards, ...action.payload]
             }
         }
         case "DELETE_CARD": {

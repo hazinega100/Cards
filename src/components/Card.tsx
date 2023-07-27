@@ -21,7 +21,7 @@ export const Card = React.memo(({id, url, title, callBack}: CardPropsType) => {
     return (
         <div key={id} className={s.card}>
             <div className={s.card_panel}>
-                <Checkbox />
+                <Checkbox size="small"/>
                 <IconButton onClick={onClickHandler} aria-label="delete" size="small">
                     <DeleteIcon fontSize="inherit"/>
                 </IconButton>
